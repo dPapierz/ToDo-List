@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mx-auto my-5 text-center">
+                <h1>ToDo List</h1>
+            </div>
+        </div>
+
+        <div class="row align-items-center justify-content-center">
+            <div class="col-8 mx-auto mb-4 text-center">
+                {{ form(form) }}
+            </div>
+        </div>
+
+        {% if tasks is not null and tasks is not empty %}
+        <form action="{{ path('homepage') }}/{{ app.request.get('sort') == "asc" ? 'desc' : 'asc'}}" method="GET">
+            <div class="row mb-4 align-items-center justify-content-center">
+                <div class="col-6">
+                    <button type="submit" name="sort" style="background: none; border: none;">
+                        <h2>Title {{ app.request.get('sort') == "asc" ? '<i class="fa-solid fa-sort-up"></i>' : '<i class="fa-solid fa-sort-down"></i>'}}</h2> 
+                    </button>
+                </div>
+                <div class="col-2 text-end">
+                    <h2>Finish</h2>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+
+        <form action="{{ path('finish') }}" method="POST">
+        {% for task in tasks %}
+            <div class="row align-items-center justify-content-center">
+                <div class="col-6 text-start">
+                    <h2>{{ task.title }}</h2>
+                    <p>{{ task.description }}</p>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="submit" name="id" value="{{ task.id }}" style="background: none; border: none;">
+                        <i class="fa-solid fa-check fs-5"></i>
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+        </form>
+    </div>
+
+{% endblock %}

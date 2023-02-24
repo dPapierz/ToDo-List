@@ -1,0 +1,16 @@
+body {
+    background-color: lightgray;
+}
+
+i {
+    cursor: pointer;
+}
+
+i.fa-check {
+    zoom: 1;
+    transition: transform 500ms;
+}
+
+i.fa-check:hover{
+    transform: scale(2);
+}
